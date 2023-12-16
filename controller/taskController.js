@@ -1,9 +1,16 @@
 import Task from "../models/TaskModel.js";
 import Category from "../models/CategoryModel.js";
+import User from "../models/UserModel.js";
 
 // add Task
 export const addTaskController = async (req, res) => {
   const { title, userId, categoryId } = req.body;
+
+  const user = await User.findById(userId);
+  if (!user) return res.status(404).send("User with this Id is not Found");
+  const category = await Category.findById(categoryId);
+  if (!category)
+    return res.status(404).send("Category with this Id is not Found");
 
   let task = new Task({
     title,
