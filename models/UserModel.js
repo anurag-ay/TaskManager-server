@@ -35,6 +35,13 @@ const userSchema = new mongoose.Schema({
       default: null,
     },
   ],
+  categories: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      default: null,
+    },
+  ],
 });
 const User = mongoose.model("Users", userSchema);
 export default User;
