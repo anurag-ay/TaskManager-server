@@ -1,0 +1,18 @@
+{
+  "name": "taskmanager",
+  "version": "1.0.0",
+  "description": "Web Application to manage tasks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Todo",
+    "TaskManager",
+    "MERN",
+    "FullStack",
+    "WebApplication"
+  ],
+  "author": "anurag-ay",
+  "license": "ISC"
+}
