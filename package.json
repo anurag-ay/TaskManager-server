@@ -1,11 +1,15 @@
 {
   "name": "taskmanager",
   "version": "1.0.0",
-  "description": "Web Application to manage tasks",
+  "description": "Web Application for managing tasks",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": "16.17.0"
+  },
+  "type": "module",
   "keywords": [
     "Todo",
     "TaskManager",
