@@ -1,9 +1,13 @@
 import Category from "../models/CategoryModel.js";
 import User from "../models/UserModel.js";
+import Task from "../models/TaskModel.js";
 
 // add category
 export const addCategoryController = async (req, res) => {
   const { type, userId } = req.body;
+
+  const user = await User.findById(userId);
+  if (!user) return res.status(404).send("User with this id is not Found");
 
   let category = await Category.findOne({ type: type, user: userId });
   if (category)
@@ -50,6 +54,8 @@ export const deleteCategoryController = async (req, res) => {
       $pull: { categories: categoryId },
     }
   );
+
+  await Task.deleteMany({ category: categoryId });
 
   res.status(200).send(category);
 };
