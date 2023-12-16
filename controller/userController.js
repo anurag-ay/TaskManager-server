@@ -25,19 +25,12 @@ export const registerUser = async (req, res) => {
     firstName,
     lastName,
     password,
-    tasks: [],
   });
 
   user.password = await bcrypt.hash(user.password, 12);
 
   let savedUser = await user.save();
-  savedUser = _.pick(savedUser, [
-    "_id",
-    "userName",
-    "firstName",
-    "lastName",
-    "tasks",
-  ]);
+  savedUser = _.pick(savedUser, ["_id", "userName", "firstName", "lastName"]);
   res.status(201).send(savedUser);
 };
 
