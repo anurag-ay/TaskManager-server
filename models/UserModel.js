@@ -28,13 +28,6 @@ const userSchema = new mongoose.Schema({
     maxlength: 255,
   },
 
-  tasks: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Task",
-      default: null,
-    },
-  ],
   categories: [
     {
       type: mongoose.Schema.Types.ObjectId,
