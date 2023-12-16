@@ -51,7 +51,13 @@ export const logIn = async (req, res) => {
   const matchPassword = await bcrypt.compare(password, user.password);
   if (!matchPassword) return res.status(403).send("Incorrect Password");
 
-  user = _.pick(user, ["_id", "userName", "firstName", "lastName"]);
+  user = _.pick(user, [
+    "_id",
+    "userName",
+    "firstName",
+    "lastName",
+    "categories",
+  ]);
   const token = jwt.sign(user, process.env.JWT_SECRET_KEY);
 
   res.status(200).send(token);
