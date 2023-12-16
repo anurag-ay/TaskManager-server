@@ -7,6 +7,8 @@ const app = express();
 
 // importing routes
 import userRoutes from "./routes/userRoute.js";
+import categoryRoute from "./routes/categoryRoute.js";
+import taskRoute from "./routes/taskRoute.js";
 
 // Calling inbuilt middleware
 app.use(express.json());
@@ -29,6 +31,8 @@ mongoose
 
 // redirecting to the routes
 app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/category", categoryRoute);
+app.use("/api/v1/task", taskRoute);
 
 // Home route
 app.get("/", (req, res) => {
