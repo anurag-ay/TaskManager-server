@@ -1,57 +1,27 @@
 import express from "express";
-import mongoose from "mongoose";
-import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 const app = express();
 
-// importing routes
-import userRoutes from "./routes/userRoute.js";
-import categoryRoute from "./routes/categoryRoute.js";
-import taskRoute from "./routes/taskRoute.js";
+import corsConfig from "./startup/corsConfig.js";
+import databaseConfig from "./startup/databaseConfig.js";
+import errorHandlingConfig from "./startup/errorHandlingConfig.js";
+import redirectionRoutes from "./startup/redirectionRoutes.js";
 
-// Calling inbuilt middleware
+//inbuilt middleware
 app.use(express.json());
 
-const corsOptions = {
-  origin: ["http://localhost:3000"],
-  methods: ["GET", "PUT", "POST", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true,
-  optionsSuccessStatus: 200,
-};
+// cors configuration
+corsConfig(app);
 
-app.use(cors(corsOptions));
+// database configuration
+databaseConfig();
 
-// Setting up database
-mongoose
-  .connect(process.env.DATABASE_URL)
-  .then(() => console.log("Connected to the MongoDB..."))
-  .catch((err) => console.log(err));
+// redirecting routes
+redirectionRoutes(app);
 
-// redirecting to the routes
-app.use("/api/v1/user", userRoutes);
-app.use("/api/v1/category", categoryRoute);
-app.use("/api/v1/task", taskRoute);
-
-// Home route
-app.get("/", (req, res) => {
-  res.status.send("This is todo home");
-});
-
-// catching unhandled exception
-process.on("uncaughtException", (ex) => {
-  console.log("We got an Exception");
-  console.log(ex);
-  process.exit(1);
-});
-
-// catching unhandled Rejection
-process.on("unhandledRejection", (ex) => {
-  console.log("We got a Rejection");
-  console.log(ex);
-  process.exit(1);
-});
+// error handling configuration
+errorHandlingConfig();
 
 // Initialize dynamic port
 const port = process.env.PORT || 5000;
