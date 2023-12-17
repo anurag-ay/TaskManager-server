@@ -14,6 +14,7 @@ const categorySchema = new mongoose.Schema({
   task: [
     {
       type: mongoose.Schema.ObjectId,
+      ref: "Task",
       default: null,
     },
   ],
