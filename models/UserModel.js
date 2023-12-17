@@ -35,6 +35,9 @@ const userSchema = new mongoose.Schema({
       default: null,
     },
   ],
+  allTaskCategory: {
+    type: mongoose.Schema.ObjectId,
+  },
 });
 const User = mongoose.model("Users", userSchema);
 export default User;
