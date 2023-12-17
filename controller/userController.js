@@ -6,6 +6,8 @@ import User, {
   validateRegisterUserRequest,
 } from "../models/UserModel.js";
 
+import Category from "../models/CategoryModel.js";
+
 // Register User
 export const registerUser = async (req, res) => {
   const { error } = validateRegisterUserRequest(req.body);
@@ -31,6 +33,20 @@ export const registerUser = async (req, res) => {
 
   let savedUser = await user.save();
   savedUser = _.pick(savedUser, ["_id", "userName", "firstName", "lastName"]);
+
+  const defaultCategory = new Category({
+    type: "All Tasks",
+    user: savedUser._id,
+  });
+  defaultCategory.save();
+
+  await User.updateOne(
+    { _id: savedUser._id },
+    {
+      $set: { allTaskCategory: defaultCategory._id },
+    }
+  );
+
   res.status(201).send(savedUser);
 };
 
@@ -57,6 +73,7 @@ export const logIn = async (req, res) => {
     "firstName",
     "lastName",
     "categories",
+    "allTaskCategory",
   ]);
   const token = jwt.sign(user, process.env.JWT_SECRET_KEY);
 
