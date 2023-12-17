@@ -32,7 +32,7 @@ export const addCategoryController = async (req, res) => {
 
 // get categories with user id
 
-export const getCategoriesByUserId = async (req, res) => {
+export const getCategoriesByUserIdController = async (req, res) => {
   const { userId } = req.params;
 
   let categories = await Category.find({ user: userId });
