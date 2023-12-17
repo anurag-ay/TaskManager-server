@@ -32,7 +32,7 @@ export const addTaskController = async (req, res) => {
 
 // get  All Task
 export const getAllTaskController = async (req, res) => {
-  const { userId } = req.body;
+  const { userId } = req.params;
   const tasks = await Task.find({ user: userId });
 
   res.status(200).send(tasks);
