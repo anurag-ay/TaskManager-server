@@ -27,7 +27,7 @@ export const addCategoryController = async (req, res) => {
     }
   );
 
-  res.status(200).send({ savedCategory });
+  res.status(200).send(savedCategory);
 };
 
 // get categories with user id
@@ -35,7 +35,7 @@ export const addCategoryController = async (req, res) => {
 export const getCategoriesByUserIdController = async (req, res) => {
   const { userId } = req.params;
 
-  let categories = await Category.find({ user: userId });
+  let categories = await Category.find({ user: userId }).populate("task");
 
   res.status(200).send(categories);
 };
