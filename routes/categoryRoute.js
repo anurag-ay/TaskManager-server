@@ -3,12 +3,12 @@ const router = express.Router();
 import {
   addCategoryController,
   deleteCategoryController,
-  getCategoriesByUserId,
+  getCategoriesByUserIdController,
   updateCategoryController,
 } from "../controller/categoryController.js";
 
 router.post("/", addCategoryController);
-router.get("/:userId", getCategoriesByUserId);
+router.get("/:userId", getCategoriesByUserIdController);
 router.delete("/", deleteCategoryController);
 router.put("/", updateCategoryController);
 
