@@ -47,15 +47,20 @@ export const getTaskByIdController = async (req, res) => {
 
 // Update Task
 export const updateTaskController = async (req, res) => {
-  const { taskId, newTitle } = req.body;
+  const { _id, title, user, note, isDone, isImportant, category } = req.body;
 
-  const task = await Task.findOneAndUpdate(
-    { _id: taskId },
-    {
-      $set: { title: newTitle },
-    },
-    { new: true }
-  );
+  const updateTask = {
+    title,
+    user,
+    note,
+    isDone,
+    isImportant,
+    category,
+  };
+
+  const task = await Task.findOneAndUpdate({ _id: _id }, updateTask, {
+    new: true,
+  });
 
   res.status(200).send(task);
 };
