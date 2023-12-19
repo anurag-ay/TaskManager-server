@@ -42,7 +42,7 @@ export const getCategoriesByUserIdController = async (req, res) => {
 
 // delete category
 export const deleteCategoryController = async (req, res) => {
-  const { categoryId, userId } = req.body;
+  const { categoryId, userId } = req.params;
 
   let category = await Category.findByIdAndDelete(categoryId);
 

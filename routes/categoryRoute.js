@@ -9,7 +9,7 @@ import {
 
 router.post("/", addCategoryController);
 router.get("/:userId", getCategoriesByUserIdController);
-router.delete("/", deleteCategoryController);
+router.delete("/:userId/:categoryId", deleteCategoryController);
 router.put("/", updateCategoryController);
 
 export default router;

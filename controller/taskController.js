@@ -67,7 +67,7 @@ export const updateTaskController = async (req, res) => {
 
 // Delete Task
 export const deleteTaskController = async (req, res) => {
-  const { userId, categoryId, taskId } = req.body;
+  const { userId, categoryId, taskId } = req.params;
 
   let task = await Task.findOneAndDelete(
     { user: userId, _id: taskId },

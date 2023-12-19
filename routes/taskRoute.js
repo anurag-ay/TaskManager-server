@@ -9,7 +9,7 @@ import {
 const router = express.Router();
 
 router.post("/", addTaskController);
-router.delete("/", deleteTaskController);
+router.delete("/:userId/:categoryId/:taskId", deleteTaskController);
 router.put("/", updateTaskController);
 router.get("/:userId", getAllTaskController);
 router.get("/:taskId", getTaskByIdController);
